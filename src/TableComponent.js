@@ -8,7 +8,7 @@ function TableComponent(props){
                 <thead>
                     <tr>
                         <th onClick={() => props.sortByName()}>name</th>
-                        <th>price</th>
+                        <th onClick={() => props.sortByPrice()}>price</th>
                         <th>action</th>
                     </tr>
                 </thead>

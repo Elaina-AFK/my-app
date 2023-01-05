@@ -13,7 +13,8 @@ function ExTable({data2}){
     const [vnClass, setvnClass] = useState('');
     const [vpClass, setvpClass] = useState('');
     const [editId, setEditId] = useState(null);
-    const [alrsorted, setSorted] = useState('');
+    const [alrsorted, setNameSorted] = useState('');
+    const [numSorted, setNumSorted] = useState('');
     const nameInput = useRef(null);
     const priceInput = useRef(null);
 
@@ -39,7 +40,8 @@ function ExTable({data2}){
             })
         );
         setEditId(null);
-        setSorted('');
+        setNameSorted('');
+        setNumSorted('');
     };
 
     const handleChange = (event) => {
@@ -67,10 +69,13 @@ function ExTable({data2}){
             const tempAddId = {...formData, "id" :idGen()}
             const newData = [...data, tempAddId]
             setData(newData);
+            setNameSorted('');
+            setNumSorted('');
         }
     };
     
     const sortByName = () => {
+        setNumSorted('');
         if (alrsorted === ''){
             setData(
                 data.sort(function(a, b) {
@@ -87,7 +92,7 @@ function ExTable({data2}){
                     return dataDetail;
                 })
             );
-            setSorted('sorted');
+            setNameSorted('sorted');
         }else{
             setData(
                 data.reverse().map((dataDetail) => {
@@ -97,10 +102,33 @@ function ExTable({data2}){
         }
     };
 
+    const sortByPrice = () => {
+        setNameSorted('');
+        if (numSorted === ''){
+            setData(
+                data.sort(function(a, b) {
+                    let priceA = a.price;
+                    let priceB = b.price;
+                    return priceA - priceB;
+                }).map((dataDetail) => {
+                    return dataDetail;
+                })
+            );
+            setNumSorted('sorted');
+        }else{
+            setData(
+                data.reverse().map((dataDetail) => {
+                    return dataDetail;
+                })
+            )
+        }
+
+    };
+
     return (
         <TableComponent data={data} vnText={vnText} vpText={vpText} formData={formData} 
         handleChange={handleChange} handleSubmit={handleSubmit} handleEdit={handleEdit} handleSave={handleSave} 
-        handleCancel={handleCancel} sortByName={sortByName}
+        handleCancel={handleCancel} sortByName={sortByName} sortByPrice={sortByPrice}
         vnClass={vnClass} vpClass={vpClass} editId={editId} nameInput={nameInput} priceInput={priceInput} />
     )
     
