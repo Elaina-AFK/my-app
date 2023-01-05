@@ -24,14 +24,14 @@ function ExTable({data2}){
         setEditId(id);
     };
 
-    const handleSave = (id) => {
+    const handleSave = () => {
         setData(
             data.map((dataDetail)=> {
-                if(editId === id){
+                if(editId === dataDetail.id){
                     return {
                         ...dataDetail,
-                        name: nameInput.current.value,
-                        price: priceInput.current.value,
+                        'name': nameInput.current.value,
+                        'price': priceInput.current.value,
                     };
                 }
                 return dataDetail;
@@ -46,6 +46,10 @@ function ExTable({data2}){
             [event.target.name]: event.target.value,
         });
     };
+
+    const handleCancel = () => {
+        setEditId(null);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -64,9 +68,14 @@ function ExTable({data2}){
         }
     };
     
+    const sortByName = () => {
+        // sort name
+    };
+
     return (
         <TableComponent data={data} vnText={vnText} vpText={vpText} formData={formData} 
         handleChange={handleChange} handleSubmit={handleSubmit} handleEdit={handleEdit} handleSave={handleSave} 
+        handleCancel={handleCancel} sortByName={sortByName}
         vnClass={vnClass} vpClass={vpClass} editId={editId} nameInput={nameInput} priceInput={priceInput} />
     )
     

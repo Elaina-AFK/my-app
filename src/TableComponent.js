@@ -7,7 +7,7 @@ function TableComponent(props){
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
-                        <th>name</th>
+                        <th onClick={() => props.sortByName()}>name</th>
                         <th>price</th>
                         <th>action</th>
                     </tr>
@@ -21,7 +21,7 @@ function TableComponent(props){
                                     <>
                                     <td><input type="text" defaultValue={dataDetail.name} ref={props.nameInput}/></td>
                                     <td><input type="text" defaultValue={dataDetail.price} ref={props.priceInput}/></td>
-                                    <td><button onClick={() => props.handleSave(dataDetail.id)}>Save</button></td>
+                                    <td><button onClick={() => props.handleSave(dataDetail.id)}>Save</button><button onClick={() => props.handleCancel()}>Cancel</button></td>                                    
                                     </>):(<>
                                     <td>{dataDetail.name}</td>
                                     <td>{dataDetail.price}</td>
