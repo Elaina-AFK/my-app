@@ -13,6 +13,7 @@ function ExTable({data2}){
     const [vnClass, setvnClass] = useState('');
     const [vpClass, setvpClass] = useState('');
     const [editId, setEditId] = useState(null);
+    const [alrsorted, setSorted] = useState('');
     const nameInput = useRef(null);
     const priceInput = useRef(null);
 
@@ -38,6 +39,7 @@ function ExTable({data2}){
             })
         );
         setEditId(null);
+        setSorted('');
     };
 
     const handleChange = (event) => {
@@ -69,7 +71,30 @@ function ExTable({data2}){
     };
     
     const sortByName = () => {
-        // sort name
+        if (alrsorted === ''){
+            setData(
+                data.sort(function(a, b) {
+                    let nameA = a.name.toUpperCase();
+                    let nameB = b.name.toUpperCase();
+                    if (nameA < nameB){
+                        return -1;
+                    }
+                    if (nameA > nameB){
+                        return 1;
+                    }
+                    return 0;
+                }).map((dataDetail) => {
+                    return dataDetail;
+                })
+            );
+            setSorted('sorted');
+        }else{
+            setData(
+                data.reverse().map((dataDetail) => {
+                    return dataDetail;
+                })
+            )
+        }
     };
 
     return (
