@@ -44,7 +44,7 @@ function ExTable({ data2 }) {
     setvpText(verifyPriceText(price));
     return [vn, vp];
   };
-  // still have bugs
+
   const handleSave = () => {
     const verified = verifying(
       data,
@@ -156,6 +156,10 @@ function ExTable({ data2 }) {
     }
   };
 
+  const handleDelete = (id) => {
+    setData(data.filter((x) => x.id !== id));
+  };
+
   return (
     <TableComponent
       data={data}
@@ -167,6 +171,7 @@ function ExTable({ data2 }) {
       handleEdit={handleEdit}
       handleSave={handleSave}
       handleCancel={handleCancel}
+      handleDelete={handleDelete}
       sortByName={sortByName}
       sortByPrice={sortByPrice}
       vnClass={vnClass}
